@@ -56,7 +56,10 @@ exports.updateUserWithoutPhoto = async (req, res) => {
 
     const updateCallback = (err) => {
         if (err) return res.status(500).json({ message: 'Gagal update user', error: err });
-        res.json({ message: 'User berhasil diupdate tanpa foto' });
+        res.json({
+            message: 'User berhasil diupdate tanpa foto',
+            updatedUser: { id, nip, nama, email, role, password }
+        });
     };
 
     if (userData.password) {

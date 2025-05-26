@@ -1,11 +1,11 @@
 const db = require('../config/db');
 
 exports.getAllUsers = (callback) => {
-    db.query('SELECT id, nip, nama, email, role, photo FROM users', callback);
+    db.query('SELECT id, nip, nama, email, role, password, photo FROM users', callback);
 };
 
 exports.getUserById = (id, callback) => {
-    db.query('SELECT id, nip, nama, email, role, photo FROM users WHERE id = ?', [id], callback);
+    db.query('SELECT id, nip, nama, email, role, password, photo FROM users WHERE id = ?', [id], callback);
 };
 
 exports.createUser = (data, callback) => {
@@ -19,10 +19,14 @@ exports.updateUser = (id, data, callback) => {
 };
 
 exports.updateUserWithoutPhoto = (id, data, callback) => {
-    const query = `UPDATE users SET nip = ?, nama = ?, email = ?, role = ? WHERE id = ?`;
-    db.query(query, [data.nip, data.nama, data.email, data.role, id], callback);
+    const query = `UPDATE users SET nip = ?, nama = ?, email = ?, role = ? password = ? WHERE id = ?`;
+    db.query(query, [data.nip, data.nama, data.email, data.role, data.password, id], callback);
 };
 
 exports.deleteUser = (id, callback) => {
     db.query('DELETE FROM users WHERE id = ?', [id], callback);
+};
+
+exports.customQuery = (query, values, callback) => {
+    db.query(query, values, callback);
 };
