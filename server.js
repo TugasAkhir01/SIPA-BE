@@ -23,6 +23,19 @@ app.options('*', cors({
   origin: 'https://sippak.up.railway.app',
   credentials: true
 }));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://sippak.up.railway.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  
+  // Tangani request OPTIONS secara cepat
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 app.use(express.json());
 
 app.use(bodyParser.json());
