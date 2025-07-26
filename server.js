@@ -9,7 +9,10 @@ const db = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://sippak.up.railway.app',
+  credentials: true // jika pakai cookie atau Authorization header
+}));
 app.use(express.json());
 
 app.use(bodyParser.json());
