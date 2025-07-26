@@ -13,8 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 app.use(bodyParser.json());
-app.use('/api', authRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/report', express.static(path.join(__dirname, 'exports')));
+app.use('/api', violationRoutes);
 
 db.connect((err) => {
   if (err) {
