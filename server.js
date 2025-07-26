@@ -48,10 +48,12 @@ app.use('/api', violationRoutes);
 db.connect((err) => {
   if (err) {
     console.error('Database connection failed:', err);
-    return;
+  } else {
+    console.log('Connected to MySQL');
   }
-  console.log('Connected to MySQL');
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
 });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
