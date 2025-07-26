@@ -15,7 +15,13 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors({
   origin: 'https://sippak.up.railway.app',
-  credentials: true // jika pakai cookie atau Authorization header
+  credentials: true
+}));
+
+// Tangani preflight request untuk semua route
+app.options('*', cors({
+  origin: 'https://sippak.up.railway.app',
+  credentials: true
 }));
 app.use(express.json());
 
